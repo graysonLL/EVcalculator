@@ -18,11 +18,13 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
       setIsAuthenticated(false);
       setProfileOpen(false);
+      window.dispatchEvent(new Event("auth-changed"));
       window.location.href = "/";
-    } catch (error) {
-      console.error("Logout failed:", error);
     }
   };
 
