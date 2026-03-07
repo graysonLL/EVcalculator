@@ -165,10 +165,13 @@ export async function updateProfile(data: {
 }
 
 export async function logout(): Promise<void> {
-  await request("/api/auth/logout", {
-    method: "POST",
-  });
-  clearAuthToken();
+  try {
+    await request("/api/auth/logout", {
+      method: "POST",
+    });
+  } finally {
+    clearAuthToken();
+  }
 }
 
 export function isAuthenticated(): boolean {
