@@ -52,20 +52,25 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { identifier, password } = req.body;
 
     // Validation
-    if (!email || !password) {
+    if (!identifier || !password) {
       return res
         .status(400)
-        .json({ message: "Email and password are required" });
+        .json({ message: "Email/username and password are required" });
     }
 
-    // Find user
-    const user = await User.findOne({ email });
+    // Find user by email OR username
+    const isEmail = identifier.includes("@");
+    const user = await User.findOne(
+      isEmail ? { email: identifier } : { username: identifier },
+    );
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res
+        .status(401)
+        .json({ message: "Invalid email/username or password" });
     }
 
     // Check password
