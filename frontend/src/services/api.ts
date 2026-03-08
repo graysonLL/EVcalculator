@@ -154,12 +154,12 @@ export async function signup(
 }
 
 export async function login(
-  email: string,
+  identifier: string,
   password: string,
 ): Promise<AuthResponse> {
   const response = await request<AuthResponse>("/api/auth/login", {
     method: "POST",
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ identifier, password }),
   });
   if (response.token) {
     setAuthToken(response.token);

@@ -180,19 +180,19 @@ export default function YourBetsPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+          <div className="bg-red-900/40 border border-red-700 text-red-300 px-4 py-3 rounded-lg mb-4 text-sm">
             {error}
           </div>
         )}
 
         {showForm && (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <div className="bg-slate-800/70 border border-slate-700 rounded-xl shadow-lg p-6 mb-8 backdrop-blur">
+            <h2 className="text-2xl font-bold text-white mb-6">
               Create New Bet
             </h2>
 
             {formError && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+              <div className="bg-red-900/40 border border-red-700 text-red-300 px-4 py-3 rounded-lg mb-4 text-sm">
                 {formError}
               </div>
             )}
@@ -200,13 +200,13 @@ export default function YourBetsPage() {
             <form onSubmit={handleSubmitBet} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
                     Bet Type
                   </label>
                   <select
                     value={betType}
                     onChange={(e) => setBetType(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
                   >
                     <option value="moneyline">Moneyline</option>
                     <option value="game_total_over">Game Total Over</option>
@@ -217,7 +217,7 @@ export default function YourBetsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
                     Amount ($)
                   </label>
                   <input
@@ -227,13 +227,13 @@ export default function YourBetsPage() {
                     step="0.01"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-slate-400"
                     placeholder="100"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
                     Odds
                   </label>
                   <input
@@ -242,19 +242,19 @@ export default function YourBetsPage() {
                     step="0.01"
                     value={odds}
                     onChange={(e) => setOdds(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-slate-400"
                     placeholder="-110"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
                     Odds Format
                   </label>
                   <select
                     value={oddsCat}
                     onChange={(e) => setOddsCat(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
                   >
                     <option value="american">American</option>
                     <option value="decimal">Decimal</option>
@@ -264,26 +264,26 @@ export default function YourBetsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-900 mb-1">
+                <label className="block text-sm font-medium text-slate-300 mb-1">
                   Notes (Optional)
                 </label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-slate-400"
                   placeholder="Add notes about this bet..."
                   rows={3}
                 />
               </div>
 
               {amount && odds && (
-                <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <div className="bg-purple-900/30 border border-purple-700/50 rounded-lg p-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-slate-400">
                         Implied Probability
                       </p>
-                      <p className="text-lg font-semibold text-gray-900">
+                      <p className="text-lg font-semibold text-white">
                         {(
                           (parseFloat(odds) > 0
                             ? 100 / (parseFloat(odds) + 100)
@@ -294,9 +294,9 @@ export default function YourBetsPage() {
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">Expected Value</p>
+                      <p className="text-sm text-slate-400">Expected Value</p>
                       <p
-                        className={`text-lg font-semibold ${calculateEV(parseFloat(amount), parseFloat(odds), oddsCat) >= 0 ? "text-green-600" : "text-red-600"}`}
+                        className={`text-lg font-semibold ${calculateEV(parseFloat(amount), parseFloat(odds), oddsCat) >= 0 ? "text-green-400" : "text-red-400"}`}
                       >
                         {formatCurrency(
                           calculateEV(
@@ -325,31 +325,34 @@ export default function YourBetsPage() {
         {loading ? (
           <div className="text-center text-white">Loading bets...</div>
         ) : bets.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-lg p-12 text-center">
-            <p className="text-gray-500 text-lg">
+          <div className="bg-slate-800/70 border border-slate-700 rounded-xl shadow-lg p-12 text-center backdrop-blur">
+            <p className="text-slate-400 text-lg">
               No bets yet. Create your first bet!
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {bets.map((bet) => (
-              <div key={bet._id} className="bg-white rounded-lg shadow-lg p-6">
+              <div
+                key={bet._id}
+                className="bg-slate-800/70 border border-slate-700 rounded-xl shadow-lg p-6 backdrop-blur"
+              >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <p className="text-sm font-medium text-gray-500 uppercase">
+                    <p className="text-sm font-medium text-slate-400 uppercase">
                       {bet.betType}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-white">
                       {formatCurrency(bet.amount)}
                     </p>
                   </div>
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
                       bet.status === "pending"
-                        ? "bg-yellow-100 text-yellow-800"
+                        ? "bg-yellow-900/50 text-yellow-300 border border-yellow-700"
                         : bet.status === "won"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
+                          ? "bg-green-900/50 text-green-300 border border-green-700"
+                          : "bg-red-900/50 text-red-300 border border-red-700"
                     }`}
                   >
                     {bet.status}
@@ -358,24 +361,22 @@ export default function YourBetsPage() {
 
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Odds</span>
-                    <span className="font-semibold text-gray-900">
-                      {bet.odds}
-                    </span>
+                    <span className="text-slate-400">Odds</span>
+                    <span className="font-semibold text-white">{bet.odds}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Implied Prob</span>
-                    <span className="font-semibold text-gray-900">
+                    <span className="text-slate-400">Implied Prob</span>
+                    <span className="font-semibold text-white">
                       {(bet.impliedProbability * 100).toFixed(1)}%
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Expected Value</span>
+                    <span className="text-slate-400">Expected Value</span>
                     <span
                       className={`font-semibold ${
                         bet.expectedValue >= 0
-                          ? "text-green-600"
-                          : "text-red-600"
+                          ? "text-green-400"
+                          : "text-red-400"
                       }`}
                     >
                       {formatCurrency(bet.expectedValue)}
@@ -384,12 +385,12 @@ export default function YourBetsPage() {
                 </div>
 
                 {bet.notes && (
-                  <p className="text-sm text-gray-600 italic mb-3">
+                  <p className="text-sm text-slate-400 italic mb-3">
                     {bet.notes}
                   </p>
                 )}
 
-                <p className="text-xs text-gray-500 mb-4">
+                <p className="text-xs text-slate-500 mb-4">
                   Created {new Date(bet.createdAt).toLocaleDateString()}
                 </p>
 
@@ -414,21 +415,19 @@ export default function YourBetsPage() {
 
         {/* Edit Modal */}
         {editingBet && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full mx-4">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Edit Bet
-              </h2>
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 backdrop-blur-sm">
+            <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-6 max-w-md w-full mx-4">
+              <h2 className="text-2xl font-bold text-white mb-4">Edit Bet</h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
                     Status
                   </label>
                   <select
                     value={editStatus}
                     onChange={(e) => setEditStatus(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
                   >
                     <option value="pending">Pending</option>
                     <option value="won">Won</option>
@@ -437,13 +436,13 @@ export default function YourBetsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1">
                     Notes
                   </label>
                   <textarea
                     value={editNotes}
                     onChange={(e) => setEditNotes(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                    className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-slate-400"
                     rows={3}
                   />
                 </div>
@@ -451,7 +450,7 @@ export default function YourBetsPage() {
                 <div className="flex gap-2 pt-4">
                   <button
                     onClick={() => setEditingBet(null)}
-                    className="flex-1 bg-gray-300 text-gray-900 py-2 rounded-lg hover:bg-gray-400 transition font-medium"
+                    className="flex-1 bg-slate-600 text-white py-2 rounded-lg hover:bg-slate-500 transition font-medium"
                   >
                     Cancel
                   </button>
