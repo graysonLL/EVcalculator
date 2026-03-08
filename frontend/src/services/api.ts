@@ -25,6 +25,16 @@ function clearAuthToken(): void {
   localStorage.removeItem("authToken");
 }
 
+/** Decode the JWT payload (no signature verification — just parse the claims). */
+function decodeTokenPayload(token: string): { exp?: number } | null {
+  try {
+    const payload = token.split(".")[1];
+    return JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
+  } catch {
+    return null;
+  }
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -52,7 +62,15 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     if (response.status === 401) {
       clearAuthToken();
     }
-    throw new Error(`Request failed with status ${response.status}`);
+    // Try to surface the server's own error message, fall back to status text.
+    let message = `Request failed with status ${response.status}`;
+    try {
+      const errBody = (await response.json()) as { message?: string };
+      if (errBody?.message) message = errBody.message;
+    } catch {
+      // ignore parse errors
+    }
+    throw new Error(message);
   }
 
   return (await response.json()) as T;
@@ -175,7 +193,15 @@ export async function logout(): Promise<void> {
 }
 
 export function isAuthenticated(): boolean {
-  return !!getAuthToken();
+  const token = getAuthToken();
+  if (!token) return false;
+  const payload = decodeTokenPayload(token);
+  if (payload?.exp && Date.now() / 1000 > payload.exp) {
+    // Token has expired — clear it so the user is treated as logged out.
+    clearAuthToken();
+    return false;
+  }
+  return true;
 }
 
 // Bet endpoints
